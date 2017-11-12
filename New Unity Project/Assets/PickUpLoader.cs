@@ -45,4 +45,12 @@ public class PickUpLoader : MonoBehaviour {
             Destroy(_placeholders[index].gameObject);
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Vehicle")
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
