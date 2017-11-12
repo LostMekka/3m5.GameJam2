@@ -402,8 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee6885719065fd4eab516fa3aca7cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 60
-  TurnSpeed: 60
+  MoveSpeed: 200
+  TurnSpeed: 80
   VehicleAngularPosition: 0
   StrongSpringValue: 4
   WeakSpringValue: 1

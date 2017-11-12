@@ -13,14 +13,14 @@ public class TrackController : MonoBehaviour
 	private Flanschable currentTrackElement;
 	private static int counter;
 
-	private Flanschable CreateTrack(Flanschable prefab, Flanschable previousTrackElement = null)
+	private Flanschable CreateTrack(Flanschable prefab, EndFlanschPoint previousTrackElement = null)
 	{
 		Flanschable nextElement = Instantiate(prefab);
 		nextElement.InitializeTrackElement("Track " + counter++);
 
 		if (previousTrackElement != null)
 		{
-			EndFlanschPoint source = previousTrackElement.EndFlanschPoints[0];
+			EndFlanschPoint source = previousTrackElement;
 			BeginFlanschPoint target = nextElement.BeginFlanschPoints[0];
 			Transform previousPos = source.transform;
 			Transform nextPos = target.transform;
@@ -42,7 +42,7 @@ public class TrackController : MonoBehaviour
 		return nextElement;
 	}
 
-	private Flanschable FlanschRandom(Flanschable target)
+	private Flanschable FlanschRandom(EndFlanschPoint target)
 	{
 		var cols = new[] {Color.gray, Color.red, Color.magenta,};
 
@@ -59,16 +59,50 @@ public class TrackController : MonoBehaviour
 		created.SetColorOfAllMeshRenderers(cols[prefabIndex]);
 		return created;
 	}
+
+	private void AutoFlanschAll(Flanschable target, int depth)
+	{
+		foreach (EndFlanschPoint fp in target.EndFlanschPoints)
+		{
+			Flanschable next = fp.ConnectedPoint == null
+				? FlanschRandom(fp)
+				: fp.ConnectedPoint.ParentFlanschable;
+			if (depth > 0) AutoFlanschAll(next, depth - 1);
+		}
+	}
+
+	private void GarbageCollectBackwards(Flanschable flanschable, int ignoreDepth = 2)
+	{
+		EndFlanschPoint endFlanschPoint = flanschable.BeginFlanschPoints[0].ConnectedPoint;
+		Flanschable previous = endFlanschPoint == null ? null : endFlanschPoint.ParentFlanschable;
+		if (previous != null)
+		{
+			GarbageCollectBackwards(previous, ignoreDepth - 1);
+			foreach (EndFlanschPoint efp in previous.EndFlanschPoints)
+			{
+				if (endFlanschPoint != efp && efp.ConnectedPoint != null) GarbageCollectForward(efp.ConnectedPoint.ParentFlanschable);
+			}
+		}
+		if (ignoreDepth <= 0) Destroy(flanschable.gameObject);
+	}
+
+	private void GarbageCollectForward(Flanschable flanschable)
+	{
+		foreach (EndFlanschPoint endPoint in flanschable.EndFlanschPoints)
+		{
+			if (endPoint.ConnectedPoint != null)
+			{
+				GarbageCollectForward(endPoint.ConnectedPoint.ParentFlanschable);
+			}
+		}
+		Destroy(flanschable.gameObject);
+	}
 	
 	// Use this for initialization
 	void Start()
 	{
 		currentTrackElement = CreateTrack(StartingTrackPrefab);
-		Flanschable head = currentTrackElement;
-		for (int i = 0; i < 40; i++)
-		{
-			head = FlanschRandom(head);
-		}
+		AutoFlanschAll(currentTrackElement, 5);
 
 		MovementPlaneInstance = Instantiate(MovementPlanePrefab);
 		MovementPlaneInstance.transform.position = currentTrackElement.BeginFlanschPoints[0].transform.position;
@@ -77,10 +111,12 @@ public class TrackController : MonoBehaviour
 		MovementPlaneInstance.StartMovementPath(currentTrackElement, NextTrackElement);
 	}
 
-	private void NextTrackElement()
+	private void NextTrackElement(EndFlanschPoint endFlanschPoint)
 	{
 		currentTrackElement.SetColorOfAllMeshRenderers(Color.green);
-		currentTrackElement = currentTrackElement.EndFlanschPoints[0].ConnectedPoint.ParentFlanschable;
+		currentTrackElement = endFlanschPoint.ConnectedPoint.ParentFlanschable;
 		MovementPlaneInstance.StartMovementPath(currentTrackElement, NextTrackElement);
+		AutoFlanschAll(currentTrackElement, 5);
+		GarbageCollectBackwards(currentTrackElement);
 	}
 }

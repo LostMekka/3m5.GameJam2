@@ -11,11 +11,11 @@ public class MovementPlane : MonoBehaviour
 	public float VehicleAngularPosition;
 	public float StrongSpringValue = 10, WeakSpringValue = 1;
 
-	private Action onPathReachedCallback;
+	private Action<EndFlanschPoint> onPathReachedCallback;
 	private string currPathName;
 	private Waypoint currentSourceWaypoint;
 
-	public void StartMovementPath(Flanschable trackElement, Action callback)
+	public void StartMovementPath(Flanschable trackElement, Action<EndFlanschPoint> callback)
 	{
 		currPathName = trackElement.name;
 		onPathReachedCallback = callback;
@@ -29,9 +29,9 @@ public class MovementPlane : MonoBehaviour
 		{
 			if (onPathReachedCallback != null)
 			{
-				Action tmp = onPathReachedCallback;
+				Action<EndFlanschPoint> tmp = onPathReachedCallback;
 				onPathReachedCallback = null;
-				tmp();
+				tmp((EndFlanschPoint)currentSourceWaypoint);
 			}
 		}
 		else
