@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4961790713551704}
   - component: {fileID: 114595678160827362}
   m_Layer: 0
-  m_Name: TestTrack
+  m_Name: Track_Test_Line_v0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

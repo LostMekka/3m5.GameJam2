@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TrackController : MonoBehaviour
@@ -57,7 +58,7 @@ public class TrackController : MonoBehaviour
 
 	private void NextTrackElement()
 	{
-		currentTrackElement.GetComponentInChildren<MeshRenderer>().material.color = Color.green;
+		currentTrackElement.GetComponentsInChildren<MeshRenderer>().ToList().ForEach(mr => mr.material.color = Color.green);
 		currentTrackElement = currentTrackElement.EndFlanschPoints[0].ConnectedPoint.ParentFlanschable;
 		MovementPlaneInstance.StartMovementPath(currentTrackElement, NextTrackElement);
 	}
