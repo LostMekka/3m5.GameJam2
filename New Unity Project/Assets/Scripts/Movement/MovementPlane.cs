@@ -9,8 +9,7 @@ public class MovementPlane : MonoBehaviour
 	public float MoveSpeed = 15;
 	public float TurnSpeed = 20;
 	public float VehicleAngularPosition;
-
-	public SpringJoint OuterJoint, InnerJoint;
+	public float StrongSpringValue = 10, WeakSpringValue = 1;
 
 	private Action onPathReachedCallback;
 	private string currPathName;
@@ -44,7 +43,7 @@ public class MovementPlane : MonoBehaviour
 				.Key;
 			currentSourceWaypoint = nextWaypoint;
 			Vector3 targetPos = nextWaypoint.gameObject.transform.position;
-			
+
 			iTween.MoveTo(gameObject, new Hashtable
 			{
 				{"name", currPathName},
@@ -69,11 +68,18 @@ public class MovementPlane : MonoBehaviour
 	{
 		iTween.Init(gameObject);
 		this.SetColorOfAllMeshRenderers(Color.blue);
+		FlipGravity();
+		FlipGravity();
 	}
 
 	private void Update()
 	{
 		VehicleAngularPosition -= Input.GetAxis("Horizontal") * TurnSpeed * Time.deltaTime;
+		if (Input.GetKeyDown("space")) FlipGravity();
+		GetComponentInChildren<Camera>().transform.LookAt(
+			GetComponentInChildren<Vehicle>().transform,
+			transform.up
+		);
 	}
 
 	private void LateUpdate()
@@ -86,5 +92,24 @@ public class MovementPlane : MonoBehaviour
 		Vector3 angles = transform.eulerAngles;
 		angles.z = VehicleAngularPosition;
 		transform.eulerAngles = angles;
+	}
+
+	public void FlipGravity()
+	{
+		SpringJoint[] springs = GetComponentsInChildren<SpringJoint>();
+		if (springs.Length != 2)
+		{
+			Debug.LogError("spring count not 2!");
+			return;
+		}
+		SpringJoint strong = springs[0];
+		SpringJoint weak = springs[1];
+		if (strong.spring < weak.spring)
+		{
+			strong = springs[1];
+			weak = springs[0];
+		}
+		strong.spring = WeakSpringValue;
+		weak.spring = StrongSpringValue;
 	}
 }

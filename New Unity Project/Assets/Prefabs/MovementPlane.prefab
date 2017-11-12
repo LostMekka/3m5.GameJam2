@@ -136,7 +136,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794456363613522}
   m_LocalRotation: {x: 0.20244546, y: 0, z: 0, w: 0.9792936}
-  m_LocalPosition: {x: 0, y: 25, z: -20}
+  m_LocalPosition: {x: 0, y: 27, z: -35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4628759545891952}
@@ -166,7 +166,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1222203489950970}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalPosition: {x: 0, y: 45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4252287079664934}
@@ -405,8 +405,8 @@ MonoBehaviour:
   MoveSpeed: 60
   TurnSpeed: 60
   VehicleAngularPosition: 0
-  OuterJoint: {fileID: 0}
-  InnerJoint: {fileID: 0}
+  StrongSpringValue: 4
+  WeakSpringValue: 1
 --- !u!124 &124589700489571622
 Behaviour:
   m_ObjectHideFlags: 1
