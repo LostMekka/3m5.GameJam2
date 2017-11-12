@@ -1,19 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Flanschable : MonoBehaviour
 {
-	public List<GameObject> RearFlanschPoints = new List<GameObject>();
-	public List<GameObject> FrontFlanschPoints = new List<GameObject>();
+	public List<BeginFlanschPoint> BeginFlanschPoints {get; private set;}
+	public List<EndFlanschPoint> EndFlanschPoints {get; private set;}
+	
 
-	// Use this for initialization
-	void Start()
+	public void InitializeTrackElement(string uniqueName)
 	{
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
+		BeginFlanschPoints = GetComponentsInChildren<BeginFlanschPoint>().ToList();
+		foreach (var point in BeginFlanschPoints) point.ParentFlanschable = this;
+		EndFlanschPoints = GetComponentsInChildren<EndFlanschPoint>().ToList();
+		foreach (var point in EndFlanschPoints) point.ParentFlanschable = this;
 	}
 }

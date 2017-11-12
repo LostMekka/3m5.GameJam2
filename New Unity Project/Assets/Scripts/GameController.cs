@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlanscherCtrl : MonoBehaviour {
+public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
