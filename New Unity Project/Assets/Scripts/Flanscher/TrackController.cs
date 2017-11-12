@@ -42,25 +42,32 @@ public class TrackController : MonoBehaviour
 		return nextElement;
 	}
 
+	private Flanschable FlanschRandom(Flanschable target)
+	{
+		var cols = new[] {Color.gray, Color.red, Color.magenta,};
+
+		float sum = TrackPrefabs.Sum(prefab => prefab.FlanschProbability);
+		float ran = Random.Range(0, sum);
+		int prefabIndex = 0;
+		foreach (Flanschable prefab in TrackPrefabs)
+		{
+			ran -= prefab.FlanschProbability;
+			if (ran <= 0) break;
+			prefabIndex++;
+		}
+		Flanschable created = CreateTrack(TrackPrefabs[prefabIndex], target);
+		created.SetColorOfAllMeshRenderers(cols[prefabIndex]);
+		return created;
+	}
+	
 	// Use this for initialization
 	void Start()
 	{
 		currentTrackElement = CreateTrack(StartingTrackPrefab);
 		Flanschable head = currentTrackElement;
-		var cols = new[] {Color.gray, Color.red, Color.magenta,};
 		for (int i = 0; i < 40; i++)
 		{
-			float sum = TrackPrefabs.Sum(prefab => prefab.FlanschProbability);
-			float ran = Random.Range(0, sum);
-			int prefabIndex = 0;
-			foreach (Flanschable prefab in TrackPrefabs)
-			{
-				ran -= prefab.FlanschProbability;
-				if (ran <= 0) break;
-				prefabIndex++;
-			}
-			head = CreateTrack(TrackPrefabs[prefabIndex], head);
-			head.SetColorOfAllMeshRenderers(cols[prefabIndex]);
+			head = FlanschRandom(head);
 		}
 
 		MovementPlaneInstance = Instantiate(MovementPlanePrefab);

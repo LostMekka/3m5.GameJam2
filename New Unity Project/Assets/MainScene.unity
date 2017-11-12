@@ -142,6 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TrackPrefabs:
   - {fileID: 114135713081544928, guid: 6e62bcd6cbb34614684dcd1997e6166a, type: 2}
+  - {fileID: 114338842990157576, guid: 6c88f856c57661d4ab60d477ee0da2eb, type: 2}
+  - {fileID: 114595052757155566, guid: 78201f3b205f05644aabfebd7a61b0f4, type: 2}
   StartingTrackPrefab: {fileID: 114595052757155566, guid: 78201f3b205f05644aabfebd7a61b0f4,
     type: 2}
   MovementPlanePrefab: {fileID: 114329821491904410, guid: 210997e461004ee46a02ed9daee0cfbc,
