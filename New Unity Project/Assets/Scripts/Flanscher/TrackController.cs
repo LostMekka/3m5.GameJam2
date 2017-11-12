@@ -22,15 +22,19 @@ public class TrackController : MonoBehaviour
 		{
 			EndFlanschPoint source = previousTrackElement.EndFlanschPoints[0];
 			BeginFlanschPoint target = nextElement.BeginFlanschPoints[0];
-
 			Transform previousPos = source.transform;
 			Transform nextPos = target.transform;
 
+			// rotate to fit flansch points
 			Vector3 angleDiff = previousPos.eulerAngles - nextPos.eulerAngles;
-			nextElement.transform.Rotate(angleDiff);
+			nextElement.transform.eulerAngles = angleDiff;
 
+			// translate to fit flansch points
 			Vector3 posDiff = previousPos.position - nextPos.position;
 			nextElement.transform.position = nextElement.transform.position + posDiff;
+
+			// rotate randomly around flansch point axis
+			nextElement.transform.RotateAround(previousPos.position, nextPos.forward, Random.Range(0f, 360f));
 
 			source.ConnectedPoint = target;
 			target.ConnectedPoint = source;
@@ -43,10 +47,20 @@ public class TrackController : MonoBehaviour
 	{
 		currentTrackElement = CreateTrack(StartingTrackPrefab);
 		Flanschable head = currentTrackElement;
-		for (int i = 0; i < 5; i++)
+		var cols = new[] {Color.gray, Color.red, Color.magenta,};
+		for (int i = 0; i < 40; i++)
 		{
-			head = CreateTrack(TrackPrefabs[0], head);
-			head.GetComponentInChildren<MeshRenderer>().material.color = Color.gray;
+			float sum = TrackPrefabs.Sum(prefab => prefab.FlanschProbability);
+			float ran = Random.Range(0, sum);
+			int prefabIndex = 0;
+			foreach (Flanschable prefab in TrackPrefabs)
+			{
+				ran -= prefab.FlanschProbability;
+				if (ran <= 0) break;
+				prefabIndex++;
+			}
+			head = CreateTrack(TrackPrefabs[prefabIndex], head);
+			head.SetColorOfAllMeshRenderers(cols[prefabIndex]);
 		}
 
 		MovementPlaneInstance = Instantiate(MovementPlanePrefab);
@@ -58,7 +72,7 @@ public class TrackController : MonoBehaviour
 
 	private void NextTrackElement()
 	{
-		currentTrackElement.GetComponentsInChildren<MeshRenderer>().ToList().ForEach(mr => mr.material.color = Color.green);
+		currentTrackElement.SetColorOfAllMeshRenderers(Color.green);
 		currentTrackElement = currentTrackElement.EndFlanschPoints[0].ConnectedPoint.ParentFlanschable;
 		MovementPlaneInstance.StartMovementPath(currentTrackElement, NextTrackElement);
 	}
