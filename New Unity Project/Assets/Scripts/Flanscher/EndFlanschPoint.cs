@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class EndFlanschPoint : MonoBehaviour,IFlanschPoint
+﻿public class EndFlanschPoint : Waypoint, IFlanschPoint
 {
 	public BeginFlanschPoint ConnectedPoint;
 	public Flanschable ParentFlanschable { get; set; }

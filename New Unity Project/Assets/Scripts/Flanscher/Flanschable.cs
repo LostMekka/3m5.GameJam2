@@ -4,25 +4,15 @@ using UnityEngine;
 
 public class Flanschable : MonoBehaviour
 {
-	private List<BeginFlanschPoint> beginFlanschPoints;
-	private List<EndFlanschPoint> endFlanschPoints;
+	public List<BeginFlanschPoint> BeginFlanschPoints {get; private set;}
+	public List<EndFlanschPoint> EndFlanschPoints {get; private set;}
+	
 
-	public List<BeginFlanschPoint> BeginFlanschPoints
+	public void InitializeTrackElement(string uniqueName)
 	{
-		get { return beginFlanschPoints; }
-	}
-
-	public List<EndFlanschPoint> EndFlanschPoints
-	{
-		get { return endFlanschPoints; }
-	}
-
-	public void InitializeFlanschPoints()
-	{
-		beginFlanschPoints = GetComponentsInChildren<BeginFlanschPoint>().ToList();
-		foreach (var point in beginFlanschPoints) point.ParentFlanschable = this;
-		endFlanschPoints = GetComponentsInChildren<EndFlanschPoint>().ToList();
-		Debug.Log("test");
-		foreach (var point in endFlanschPoints) point.ParentFlanschable = this;
+		BeginFlanschPoints = GetComponentsInChildren<BeginFlanschPoint>().ToList();
+		foreach (var point in BeginFlanschPoints) point.ParentFlanschable = this;
+		EndFlanschPoints = GetComponentsInChildren<EndFlanschPoint>().ToList();
+		foreach (var point in EndFlanschPoints) point.ParentFlanschable = this;
 	}
 }

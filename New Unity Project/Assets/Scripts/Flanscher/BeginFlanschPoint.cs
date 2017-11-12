@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public class BeginFlanschPoint : MonoBehaviour, IFlanschPoint
+﻿public class BeginFlanschPoint : Waypoint, IFlanschPoint
 {
 	public EndFlanschPoint ConnectedPoint;
 	public Flanschable ParentFlanschable { get; set; }

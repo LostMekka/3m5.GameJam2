@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework.Interfaces;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class TrackController : MonoBehaviour
@@ -11,15 +9,14 @@ public class TrackController : MonoBehaviour
 
 	public MovementPlane MovementPlaneInstance { get; set; }
 
-	private Flanschable currentTrackElement = null;
-	private static int counter = 0;
+	private Flanschable currentTrackElement;
+	private static int counter;
 
 	private Flanschable CreateTrack(Flanschable prefab, Flanschable previousTrackElement = null)
 	{
 		Flanschable nextElement = Instantiate(prefab);
-		Debug.Log("instantiated");
-		nextElement.InitializeFlanschPoints();
-		nextElement.gameObject.name = "Track " + counter++;
+		nextElement.InitializeTrackElement("Track " + counter++);
+
 		if (previousTrackElement != null)
 		{
 			EndFlanschPoint source = previousTrackElement.EndFlanschPoints[0];
@@ -45,15 +42,23 @@ public class TrackController : MonoBehaviour
 	{
 		currentTrackElement = CreateTrack(StartingTrackPrefab);
 		Flanschable head = currentTrackElement;
-		for (int i = 0; i < 5; i++) head = CreateTrack(TrackPrefabs[0], head);
+		for (int i = 0; i < 5; i++)
+		{
+			head = CreateTrack(TrackPrefabs[0], head);
+			head.GetComponentInChildren<MeshRenderer>().material.color = Color.gray;
+		}
 
 		MovementPlaneInstance = Instantiate(MovementPlanePrefab);
 		MovementPlaneInstance.transform.position = currentTrackElement.BeginFlanschPoints[0].transform.position;
 		MovementPlaneInstance.transform.rotation = currentTrackElement.BeginFlanschPoints[0].transform.rotation;
+
+		MovementPlaneInstance.StartMovementPath(currentTrackElement, NextTrackElement);
 	}
 
-	// Update is called once per frame
-	void Update()
+	private void NextTrackElement()
 	{
+		currentTrackElement.GetComponentInChildren<MeshRenderer>().material.color = Color.green;
+		currentTrackElement = currentTrackElement.EndFlanschPoints[0].ConnectedPoint.ParentFlanschable;
+		MovementPlaneInstance.StartMovementPath(currentTrackElement, NextTrackElement);
 	}
 }
