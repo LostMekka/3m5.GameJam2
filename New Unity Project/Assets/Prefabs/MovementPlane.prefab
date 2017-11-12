@@ -55,9 +55,9 @@ GameObject:
   - component: {fileID: 65518035108054402}
   - component: {fileID: 23879788684117702}
   - component: {fileID: 54706033801351732}
-  - component: {fileID: 145367629383559282}
-  - component: {fileID: 145430140310550810}
-  - component: {fileID: 114436933095336380}
+  - component: {fileID: 145032105817411152}
+  - component: {fileID: 145511863152877988}
+  - component: {fileID: 114177659025190330}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Untagged
@@ -140,7 +140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4628759545891952}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 23.36, y: 0, z: 0}
 --- !u!4 &4628759545891952
 Transform:
@@ -154,8 +154,8 @@ Transform:
   m_Children:
   - {fileID: 4948750167457958}
   - {fileID: 4790134561424252}
-  - {fileID: 4898718164141746}
   - {fileID: 4264434928369920}
+  - {fileID: 4898718164141746}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -180,11 +180,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1422627102877960}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 10.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4628759545891952}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4948750167457958
 Transform:
@@ -380,6 +380,17 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794456363613522}
   m_Enabled: 1
+--- !u!114 &114177659025190330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1422627102877960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d791658ae239b9419aa28b761f05860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114329821491904410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,18 +402,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee6885719065fd4eab516fa3aca7cd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 80
---- !u!114 &114436933095336380
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1422627102877960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d791658ae239b9419aa28b761f05860, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  MoveSpeed: 60
+  TurnSpeed: 60
+  VehicleAngularPosition: 0
+  OuterJoint: {fileID: 0}
+  InnerJoint: {fileID: 0}
 --- !u!124 &124589700489571622
 Behaviour:
   m_ObjectHideFlags: 1
@@ -410,14 +414,14 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794456363613522}
   m_Enabled: 1
---- !u!145 &145367629383559282
+--- !u!145 &145032105817411152
 SpringJoint:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1422627102877960}
   m_ConnectedBody: {fileID: 54940990239184752}
-  m_Anchor: {x: 0, y: -0.5, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2
@@ -432,14 +436,14 @@ SpringJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!145 &145430140310550810
+--- !u!145 &145511863152877988
 SpringJoint:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1422627102877960}
   m_ConnectedBody: {fileID: 54933743831466048}
-  m_Anchor: {x: 0, y: -0.5, z: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   serializedVersion: 2

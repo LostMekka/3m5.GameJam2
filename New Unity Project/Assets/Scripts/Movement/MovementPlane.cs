@@ -6,7 +6,11 @@ using UnityEngine;
 
 public class MovementPlane : MonoBehaviour
 {
-	public float Speed = 15;
+	public float MoveSpeed = 15;
+	public float TurnSpeed = 20;
+	public float VehicleAngularPosition;
+
+	public SpringJoint OuterJoint, InnerJoint;
 
 	private Action onPathReachedCallback;
 	private string currPathName;
@@ -45,7 +49,7 @@ public class MovementPlane : MonoBehaviour
 			{
 				{"name", currPathName},
 				{"path", new[] {gameObject.transform.position, targetPos}},
-				{"speed", Speed},
+				{"speed", MoveSpeed},
 				{"easetype", iTween.EaseType.linear},
 				{"oncomplete", "MoveToNextWaypoint"},
 				{"oncompletetarget", gameObject},
@@ -55,7 +59,7 @@ public class MovementPlane : MonoBehaviour
 			iTween.LookTo(gameObject, new Hashtable
 			{
 				{"looktarget", targetPos},
-				{"time", (gameObject.transform.position - targetPos).magnitude / Speed * 2.5f},
+				{"time", (gameObject.transform.position - targetPos).magnitude / MoveSpeed * 2.5f},
 				{"easetype", iTween.EaseType.easeOutSine},
 			});
 		}
@@ -65,5 +69,22 @@ public class MovementPlane : MonoBehaviour
 	{
 		iTween.Init(gameObject);
 		this.SetColorOfAllMeshRenderers(Color.blue);
+	}
+
+	private void Update()
+	{
+		VehicleAngularPosition -= Input.GetAxis("Horizontal") * TurnSpeed * Time.deltaTime;
+	}
+
+	private void LateUpdate()
+	{
+		CorrectVehiclePosition();
+	}
+
+	private void CorrectVehiclePosition()
+	{
+		Vector3 angles = transform.eulerAngles;
+		angles.z = VehicleAngularPosition;
+		transform.eulerAngles = angles;
 	}
 }
