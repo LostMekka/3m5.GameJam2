@@ -921,8 +921,8 @@ MonoBehaviour:
   - InvertControls
   - LowerSpeed
   - SpeedUp
-  count: 3
-  pickupScale: {x: 0.5, y: 0.5, z: 0.5}
+  _count: 3
+  _pickupScale: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!114 &114673653729963986
 MonoBehaviour:
   m_ObjectHideFlags: 1
