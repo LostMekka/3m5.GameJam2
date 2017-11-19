@@ -13,6 +13,8 @@ ModelImporter:
     100010: //RootNode
     100012: Cylinder.003
     100014: Cylinder.004
+    100016: BezierCurve.006
+    100018: BezierCurve.007
     400000: Camera
     400002: Cylinder
     400004: Cylinder.001
@@ -21,6 +23,8 @@ ModelImporter:
     400010: //RootNode
     400012: Cylinder.003
     400014: Cylinder.004
+    400016: BezierCurve.006
+    400018: BezierCurve.007
     2000000: Camera
     2300000: Cylinder
     2300002: Cylinder.001
@@ -28,17 +32,23 @@ ModelImporter:
     2300006: //RootNode
     2300008: Cylinder.003
     2300010: Cylinder.004
+    2300012: BezierCurve.006
+    2300014: BezierCurve.007
     3300000: Cylinder
     3300002: Cylinder.001
     3300004: Cylinder.002
     3300006: //RootNode
     3300008: Cylinder.003
     3300010: Cylinder.004
+    3300012: BezierCurve.006
+    3300014: BezierCurve.007
     4300000: Cylinder
     4300002: Cylinder.001
     4300004: Cylinder.002
     4300006: Cylinder.004
     4300008: Cylinder.003
+    4300010: BezierCurve.007
+    4300012: BezierCurve.006
     10800000: Lamp
   externalObjects:
   - first:
