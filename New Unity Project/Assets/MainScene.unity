@@ -153,6 +153,7 @@ MonoBehaviour:
     type: 2}
   MovementPlanePrefab: {fileID: 114329821491904410, guid: 210997e461004ee46a02ed9daee0cfbc,
     type: 2}
+  _depth: 5
 --- !u!4 &150203056
 Transform:
   m_ObjectHideFlags: 0

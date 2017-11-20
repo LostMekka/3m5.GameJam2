@@ -13,6 +13,8 @@ public class TrackController : MonoBehaviour
 	private Flanschable currentTrackElement;
 	private static int counter;
 
+    public int _depth = 5;
+
     static Color[] cols = new Color[] { Color.gray, Color.red, Color.magenta, Color.blue, Color.gray, Color.yellow, Color.white, Color.cyan };
 
 
@@ -104,7 +106,7 @@ public class TrackController : MonoBehaviour
 	void Start()
 	{
 		currentTrackElement = CreateTrack(StartingTrackPrefab);
-		AutoFlanschAll(currentTrackElement, 5);
+		AutoFlanschAll(currentTrackElement, _depth);
 
 		MovementPlaneInstance = Instantiate(MovementPlanePrefab);
 		MovementPlaneInstance.transform.position = currentTrackElement.BeginFlanschPoints[0].transform.position;
