@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641252, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -141,10 +141,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TrackPrefabs:
-  - {fileID: 114135713081544928, guid: 6e62bcd6cbb34614684dcd1997e6166a, type: 2}
-  - {fileID: 114338842990157576, guid: 6c88f856c57661d4ab60d477ee0da2eb, type: 2}
-  - {fileID: 114595052757155566, guid: 78201f3b205f05644aabfebd7a61b0f4, type: 2}
-  StartingTrackPrefab: {fileID: 114595052757155566, guid: 78201f3b205f05644aabfebd7a61b0f4,
+  - {fileID: 114276321495010048, guid: f282d9eba29db2e45a3b02a481aba2f8, type: 2}
+  - {fileID: 114931940748379880, guid: 48ac207e993797b49b69c90467189fca, type: 2}
+  - {fileID: 114792367816365906, guid: a9ed0c6f8941419429f6a061c2dbdb9a, type: 2}
+  - {fileID: 114600281135278854, guid: e1720b4c8249b7e44872340dfdbb7e99, type: 2}
+  - {fileID: 114518938169715556, guid: 9668b90d5b7dbc441a16d5faa169fdeb, type: 2}
+  - {fileID: 114890518422691684, guid: b9e11a017621262448e9ac996331aa19, type: 2}
+  - {fileID: 114633399721983648, guid: 46c74550326f56d4e9075a3cbc7c0f97, type: 2}
+  - {fileID: 114209610522855638, guid: 94c7c53179322c7428e4ddd56b1b0b85, type: 2}
+  StartingTrackPrefab: {fileID: 114276321495010048, guid: f282d9eba29db2e45a3b02a481aba2f8,
     type: 2}
   MovementPlanePrefab: {fileID: 114329821491904410, guid: 210997e461004ee46a02ed9daee0cfbc,
     type: 2}

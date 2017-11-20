@@ -13,7 +13,10 @@ public class TrackController : MonoBehaviour
 	private Flanschable currentTrackElement;
 	private static int counter;
 
-	private Flanschable CreateTrack(Flanschable prefab, EndFlanschPoint previousTrackElement = null)
+    static Color[] cols = new Color[] { Color.gray, Color.red, Color.magenta, Color.blue, Color.gray, Color.yellow, Color.white, Color.cyan };
+
+
+    private Flanschable CreateTrack(Flanschable prefab, EndFlanschPoint previousTrackElement = null)
 	{
 		Flanschable nextElement = Instantiate(prefab);
 		nextElement.InitializeTrackElement("Track " + counter++);
@@ -44,8 +47,7 @@ public class TrackController : MonoBehaviour
 
 	private Flanschable FlanschRandom(EndFlanschPoint target)
 	{
-		var cols = new[] {Color.gray, Color.red, Color.magenta,};
-
+		
 		float sum = TrackPrefabs.Sum(prefab => prefab.FlanschProbability);
 		float ran = Random.Range(0, sum);
 		int prefabIndex = 0;
@@ -56,7 +58,7 @@ public class TrackController : MonoBehaviour
 			prefabIndex++;
 		}
 		Flanschable created = CreateTrack(TrackPrefabs[prefabIndex], target);
-		created.SetColorOfAllMeshRenderers(cols[prefabIndex]);
+		created.SetColorOfAllMeshRenderers(cols[prefabIndex % cols.Length]);
 		return created;
 	}
 
