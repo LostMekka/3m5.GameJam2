@@ -35,6 +35,11 @@ ModelImporter:
     100054: Torus.020
     100056: Torus.021
     100058: Torus.022
+    100060: Torus
+    100062: BezierCurve
+    100064: BezierCurve.001
+    100066: BezierCurve.002
+    100068: BezierCurve.003
     400000: //RootNode
     400002: Torus.008
     400004: Torus.009
@@ -65,6 +70,11 @@ ModelImporter:
     400054: Torus.020
     400056: Torus.021
     400058: Torus.022
+    400060: Torus
+    400062: BezierCurve
+    400064: BezierCurve.001
+    400066: BezierCurve.002
+    400068: BezierCurve.003
     2000000: Camera
     2300000: Torus.008
     2300002: Torus.009
@@ -94,6 +104,11 @@ ModelImporter:
     2300050: Torus.020
     2300052: Torus.021
     2300054: Torus.022
+    2300056: Torus
+    2300058: BezierCurve
+    2300060: BezierCurve.001
+    2300062: BezierCurve.002
+    2300064: BezierCurve.003
     3300000: Torus.008
     3300002: Torus.009
     3300004: //RootNode
@@ -122,6 +137,11 @@ ModelImporter:
     3300050: Torus.020
     3300052: Torus.021
     3300054: Torus.022
+    3300056: Torus
+    3300058: BezierCurve
+    3300060: BezierCurve.001
+    3300062: BezierCurve.002
+    3300064: BezierCurve.003
     4300000: Torus.009
     4300002: Torus.008
     4300004: Torus.022
@@ -149,6 +169,11 @@ ModelImporter:
     4300048: Torus.019
     4300050: Torus.020
     4300052: Torus.021
+    4300054: Torus
+    4300056: BezierCurve.001
+    4300058: BezierCurve
+    4300060: BezierCurve.003
+    4300062: BezierCurve.002
     10800000: Lamp
   externalObjects:
   - first:
